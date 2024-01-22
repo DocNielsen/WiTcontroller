@@ -405,7 +405,8 @@ void browseSsids() { // show the found SSIDs
   setAppnameForOled();
   oledText[2] = msg_browsing_for_ssids;
   writeOledArray(false, false, true, true);
-
+  WiFi.setSortMethod(WIFI_CONNECT_AP_BY_SIGNAL);
+  WiFi.setScanMethod(WIFI_ALL_CHANNEL_SCAN);
   int numSsids = WiFi.scanNetworks();
   while ( (numSsids == -1)
     && ((nowTime-startTime) <= 10000) ) { // try for 10 seconds
@@ -593,7 +594,9 @@ void connectSsid() {
       oledText[1] = selectedSsid; oledText[2] =  msg_trying_to_connect + " (" + String(i) + ")";
       writeOledArray(false, false, true, true);
 
-      nowTime = startTime;      
+      nowTime = startTime;
+      WiFi.setSortMethod(WIFI_CONNECT_AP_BY_SIGNAL);
+      WiFi.setScanMethod(WIFI_ALL_CHANNEL_SCAN);      
       WiFi.begin(cSsid, cPassword); 
 
       debug_print("Trying Network ... Checking status "); debug_print(cSsid); debug_print(" :"); debug_print(cPassword); debug_println(":");
