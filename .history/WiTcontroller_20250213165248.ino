@@ -2145,7 +2145,7 @@ void doKeyHold(char key) {
       esp_restart();
       break;
     default:  // do something
-     // doDirectCommand(key, true);
+      doDirectCommand(key, true);
       break;
   }
 }
